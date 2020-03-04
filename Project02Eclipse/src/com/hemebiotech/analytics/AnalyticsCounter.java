@@ -3,41 +3,35 @@ package com.hemebiotech.analytics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.*;
 
 public class AnalyticsCounter {
-	private static int headacheCount = 0;	// initialize to 0
-	private static int rashCount = 0;		// initialize to 0
-	private static int pupilCount = 0;		// initialize to 0
-	
-	public static void main(String args[]) throws Exception {
-		// first get input
-		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
-		String line = reader.readLine();
+    //On declare une HashMap Clé/Valeur = symptoms/occurrence
+    static Map<String, Integer> symptomsCounter = new HashMap<>();git
+    public static void main(String args[]) throws Exception {
+        //Etape1 On lit le fichier symptoms.txt
+        BufferedReader reader = new BufferedReader(new FileReader("symptoms.txt"));
+        String line = reader.readLine();
 
-		int i = 0;	// set i to 0
-		int headCount = 0;	// counts headaches
-		while (line != null) {
-			i++;	// increment i
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headCount++;
-				System.out.println("number of headaches: " + headCount);
-			}
-			else if (line.equals("rush")) {
-				rashCount++;
-			}
-			else if (line.contains("pupils")) {
-				pupilCount++;
-			}
+        //Etape2 On parcours le fichier en comptant les symptomes avec la map
+        while (line != null) {
+            if (symptomsCounter.containsKey(line)) {
+                symptomsCounter.put(line, symptomsCounter.get(line) + 1);
+            } else {
+                symptomsCounter.put(line, 1);
+            }
+            line = reader.readLine();
+        }
+        //Etape3 On range dans l'ordre alphabetique les symptomes
+        List<String> symptoms = new ArrayList<>(symptomsCounter.keySet());
+        Collections.sort(symptoms);
 
-			line = reader.readLine();	// get another symptom
-		}
-		
-		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
-	}
+        //Etape4 On ecrit le fichier result.out
+        FileWriter writer = new FileWriter("result.out");
+        for (String symptom : symptoms) {
+            writer.write(symptom + "=" + symptomsCounter.get(symptom)+"\n");
+        }
+        writer.close();
+        reader.close();
+    }
 }
