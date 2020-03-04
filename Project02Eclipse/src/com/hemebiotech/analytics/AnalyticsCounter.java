@@ -7,7 +7,7 @@ import java.util.*;
 
 public class AnalyticsCounter {
     //On declare une HashMap Clé/Valeur = symptoms/occurrence
-    static Map<String, Integer> symptomsCounter = new HashMap<>();git
+    static Map<String, Integer> symptomsCounter = new HashMap<>();
     public static void main(String args[]) throws Exception {
         //Etape1 On lit le fichier symptoms.txt
         BufferedReader reader = new BufferedReader(new FileReader("symptoms.txt"));
