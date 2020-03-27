@@ -1,5 +1,7 @@
 package com.hemebiotech.analytics;
 
+import com.hemebiotech.analytics.read.ReadSymptomDataFromFile;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,18 +11,19 @@ public class AnalyticsCounter {
     //On declare une HashMap Clé/Valeur = symptoms/occurrence
     static Map<String, Integer> symptomsCounter = new HashMap<>();
     public static void main(String args[]) throws Exception {
-        //Etape1 On lit le fichier symptoms.txt
-        BufferedReader reader = new BufferedReader(new FileReader("symptoms.txt"));
-        String line = reader.readLine();
+        //Etape1 On lit le fichier symptoms.txt et stock dans une list de String allSymptoms
+
+        ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile("symptoms.txt");
+        List<String> allSymptoms = reader.GetSymptoms();
 
         //Etape2 On parcours le fichier en comptant les symptomes avec la map
-        while (line != null) {
-            if (symptomsCounter.containsKey(line)) {
-                symptomsCounter.put(line, symptomsCounter.get(line) + 1);
+
+        for (String symptom : allSymptoms) {
+            if (symptomsCounter.containsKey(symptom)) {
+                symptomsCounter.put(symptom, symptomsCounter.get(symptom) + 1);
             } else {
-                symptomsCounter.put(line, 1);
+                symptomsCounter.put(symptom, 1);
             }
-            line = reader.readLine();
         }
         //Etape3 On range dans l'ordre alphabetique les symptomes
         List<String> symptoms = new ArrayList<>(symptomsCounter.keySet());
@@ -32,6 +35,5 @@ public class AnalyticsCounter {
             writer.write(symptom + "=" + symptomsCounter.get(symptom)+"\n");
         }
         writer.close();
-        reader.close();
     }
 }
