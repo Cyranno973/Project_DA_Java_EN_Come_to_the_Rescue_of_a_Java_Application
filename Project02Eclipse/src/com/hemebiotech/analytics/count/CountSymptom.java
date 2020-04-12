@@ -4,15 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CountSymptom {
+public class CountSymptom implements ICountSymptom {
 
     /**
      * Cette methode compt les differents symptoms
+     *
      * @param symptoms
      * @return
      */
-    public Map<String, Integer> count(List<String> symptoms){
-       Map<String, Integer> symptomsCounter = new HashMap<>();
+    @Override
+    public Map<String, Integer> count(List<String> symptoms) {
+        Map<String, Integer> symptomsCounter = new HashMap<>();
 
         for (String symptom : symptoms) {
             if (symptomsCounter.containsKey(symptom)) {

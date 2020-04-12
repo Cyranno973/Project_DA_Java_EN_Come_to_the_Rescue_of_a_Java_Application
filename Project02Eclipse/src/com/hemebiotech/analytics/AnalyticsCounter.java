@@ -4,10 +4,6 @@ import com.hemebiotech.analytics.count.CountSymptom;
 import com.hemebiotech.analytics.read.ReadSymptomDataFromFile;
 import com.hemebiotech.analytics.sort.SortSymptomByName;
 import com.hemebiotech.analytics.write.WriteSymptomDataToFile;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.*;
 
 public class AnalyticsCounter {
@@ -25,7 +21,7 @@ public class AnalyticsCounter {
 
         //Etape3 On range dans l'ordre alphabetique les symptomes
         SortSymptomByName sorter = new SortSymptomByName();
-        List<String>  symptoms = sorter.sort(symptomsCounter.keySet());
+        List<String> symptoms = sorter.sort(symptomsCounter.keySet());
 
         //Etape4 On ecrit le fichier result.out
 

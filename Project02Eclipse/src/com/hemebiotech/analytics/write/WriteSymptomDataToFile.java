@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class WriteSymptomDataToFile {
+public class WriteSymptomDataToFile implements IWriteSymptomDataToFile {
     private String filepath;
 
     public WriteSymptomDataToFile(String filePath) {
         this.filepath = filePath;
     }
 
+    @Override
     public void write(List<String> symptoms, Map<String, Integer> symptomsCounter) {
         FileWriter writer = null;
         try {
