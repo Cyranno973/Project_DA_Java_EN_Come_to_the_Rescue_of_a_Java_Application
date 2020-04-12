@@ -1,37 +1,47 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import com.hemebiotech.analytics.count.CountSymptom;
+import com.hemebiotech.analytics.count.ICountSymptom;
+import com.hemebiotech.analytics.read.ISymptomReader;
+import com.hemebiotech.analytics.read.ReadSymptomDataFromFile;
+import com.hemebiotech.analytics.sort.ISortSymptomByName;
+import com.hemebiotech.analytics.sort.SortSymptomByName;
+import com.hemebiotech.analytics.write.IWriteSymptomDataToFile;
+import com.hemebiotech.analytics.write.WriteSymptomDataToFile;
+
 import java.util.*;
 
 public class AnalyticsCounter {
-    //On declare une HashMap Clé/Valeur = symptoms/occurrence
-    static Map<String, Integer> symptomsCounter = new HashMap<>();
-    public static void main(String args[]) throws Exception {
-        //Etape1 On lit le fichier symptoms.txt
-        BufferedReader reader = new BufferedReader(new FileReader("symptoms.txt"));
-        String line = reader.readLine();
+    private final ISymptomReader reader;
+    private final ICountSymptom counter;
+    private final ISortSymptomByName sorter;
+    private final IWriteSymptomDataToFile writer;
+
+    public AnalyticsCounter(ISymptomReader reader, ICountSymptom counter, ISortSymptomByName sorter, IWriteSymptomDataToFile writer){
+
+        this.reader = reader;
+        this.counter = counter;
+        this.sorter = sorter;
+        this.writer = writer;
+    }
+    public void execute() {
+
+        //Etape1 On lit le fichier symptoms.txt et stock dans une list de String allSymptoms
+
+        List<String> allSymptoms = reader.GetSymptoms();
 
         //Etape2 On parcours le fichier en comptant les symptomes avec la map
-        while (line != null) {
-            if (symptomsCounter.containsKey(line)) {
-                symptomsCounter.put(line, symptomsCounter.get(line) + 1);
-            } else {
-                symptomsCounter.put(line, 1);
-            }
-            line = reader.readLine();
-        }
+
+        Map<String, Integer> symptomsCounter = counter.count(allSymptoms);
+
         //Etape3 On range dans l'ordre alphabetique les symptomes
-        List<String> symptoms = new ArrayList<>(symptomsCounter.keySet());
-        Collections.sort(symptoms);
+
+        List<String> symptoms = sorter.sort(symptomsCounter.keySet());
 
         //Etape4 On ecrit le fichier result.out
-        FileWriter writer = new FileWriter("result.out");
-        for (String symptom : symptoms) {
-            writer.write(symptom + "=" + symptomsCounter.get(symptom)+"\n");
-        }
-        writer.close();
-        reader.close();
+
+        writer.write(symptoms, symptomsCounter);
     }
+
+
 }
