@@ -7,6 +7,12 @@ import java.util.List;
 
 public class SortSymptomByName implements ISortSymptomByName {
     @Override
+    /**
+     * Cette methode trie les différents symptoms
+     *
+     * @param symptoms
+     * @return
+     */
     public List<String> sort(Collection<String> symptoms) {
         List<String> copysSymptoms = new ArrayList<>(symptoms);
         Collections.sort(copysSymptoms);

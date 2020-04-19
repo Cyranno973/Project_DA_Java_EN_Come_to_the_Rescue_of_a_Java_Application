@@ -9,8 +9,10 @@ import com.hemebiotech.analytics.sort.SortSymptomByName;
 import com.hemebiotech.analytics.write.IWriteSymptomDataToFile;
 import com.hemebiotech.analytics.write.WriteSymptomDataToFile;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
         ICountSymptom counter = new CountSymptom();
         ISortSymptomByName sorter = new SortSymptomByName();
