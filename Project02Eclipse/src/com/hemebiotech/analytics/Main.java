@@ -16,6 +16,7 @@ public class Main {
         ISortSymptomByName sorter = new SortSymptomByName();
         IWriteSymptomDataToFile writer = new WriteSymptomDataToFile("result.out");
 
+
         new AnalyticsCounter(reader,counter,sorter,writer).execute();
 
     }
