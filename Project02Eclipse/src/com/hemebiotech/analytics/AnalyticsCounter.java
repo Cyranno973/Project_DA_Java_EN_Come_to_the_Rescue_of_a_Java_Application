@@ -1,14 +1,11 @@
 package com.hemebiotech.analytics;
 
-import com.hemebiotech.analytics.count.CountSymptom;
 import com.hemebiotech.analytics.count.ICountSymptom;
 import com.hemebiotech.analytics.read.ISymptomReader;
-import com.hemebiotech.analytics.read.ReadSymptomDataFromFile;
 import com.hemebiotech.analytics.sort.ISortSymptomByName;
-import com.hemebiotech.analytics.sort.SortSymptomByName;
 import com.hemebiotech.analytics.write.IWriteSymptomDataToFile;
-import com.hemebiotech.analytics.write.WriteSymptomDataToFile;
 
+import java.io.IOException;
 import java.util.*;
 
 public class AnalyticsCounter {
@@ -24,11 +21,11 @@ public class AnalyticsCounter {
         this.sorter = sorter;
         this.writer = writer;
     }
-    public void execute() {
+    public void execute() throws IOException {
 
         //Etape1 On lit le fichier symptoms.txt et stock dans une list de String allSymptoms
 
-        List<String> allSymptoms = reader.GetSymptoms();
+        List<String> allSymptoms = reader.getSymptoms();
 
         //Etape2 On parcours le fichier en comptant les symptomes avec la map
 

@@ -13,7 +13,13 @@ public class WriteSymptomDataToFile implements IWriteSymptomDataToFile {
     }
 
     @Override
-    public void write(List<String> symptoms, Map<String, Integer> symptomsCounter) {
+    /**
+     * Cette methode ecrit les differents symptoms et leur occurence
+     *
+     * @param symptoms
+     * @return
+     */
+    public void write(List<String> symptoms, Map<String, Integer> symptomsCounter) throws IOException {
         FileWriter writer = null;
         try {
             writer = new FileWriter(filepath);
@@ -21,9 +27,12 @@ public class WriteSymptomDataToFile implements IWriteSymptomDataToFile {
             for (String symptom : symptoms) {
                 writer.write(symptom + "=" + symptomsCounter.get(symptom) + "\n");
             }
-            writer.close();
+
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            writer.close();
         }
     }
 }
