@@ -5,6 +5,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Cette Class permet de trier les  symptoms
+ *
+ */
 public class SortSymptomByName implements ISortSymptomByName {
     @Override
     /**

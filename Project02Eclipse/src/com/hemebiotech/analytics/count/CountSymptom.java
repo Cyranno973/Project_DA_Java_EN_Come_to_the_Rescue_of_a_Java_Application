@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Cette class permet de compter les symptomes et implement ICountSymptom
+ *
+ */
 public class CountSymptom implements ICountSymptom {
 
     /**

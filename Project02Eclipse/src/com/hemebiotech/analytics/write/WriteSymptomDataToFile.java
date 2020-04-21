@@ -4,10 +4,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Cette Class ecrit les differents symptoms sur ke fichier de sorti result.out
+ *
+ */
 public class WriteSymptomDataToFile implements IWriteSymptomDataToFile {
     private String filepath;
-
+    /**
+     * Ce constructor  attent un string filepath
+     *
+     * @param filePath
+     * @return
+     */
     public WriteSymptomDataToFile(String filePath) {
         this.filepath = filePath;
     }

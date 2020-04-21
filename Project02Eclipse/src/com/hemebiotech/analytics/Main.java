@@ -10,7 +10,10 @@ import com.hemebiotech.analytics.write.IWriteSymptomDataToFile;
 import com.hemebiotech.analytics.write.WriteSymptomDataToFile;
 
 import java.io.IOException;
-
+/**
+ * Cette class est la class principal lancer par le programme
+ *
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
         ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");

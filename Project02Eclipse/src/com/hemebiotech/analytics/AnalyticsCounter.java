@@ -8,12 +8,22 @@ import com.hemebiotech.analytics.write.IWriteSymptomDataToFile;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Cette class gere les interfaces
+ *
+ *
+ */
 public class AnalyticsCounter {
     private final ISymptomReader reader;
     private final ICountSymptom counter;
     private final ISortSymptomByName sorter;
     private final IWriteSymptomDataToFile writer;
 
+    /**
+     * Cette class demande dans son constructor toutes les intefaces
+     *
+     * @param  reader,counter,sorter,writer
+     */
     public AnalyticsCounter(ISymptomReader reader, ICountSymptom counter, ISortSymptomByName sorter, IWriteSymptomDataToFile writer){
 
         this.reader = reader;
@@ -21,6 +31,10 @@ public class AnalyticsCounter {
         this.sorter = sorter;
         this.writer = writer;
     }
+    /**
+     * Cette methode lance ou execute toutes les fonctions
+     *
+     */
     public void execute() throws IOException {
 
         //Etape1 On lit le fichier symptoms.txt et stock dans une list de String allSymptoms
